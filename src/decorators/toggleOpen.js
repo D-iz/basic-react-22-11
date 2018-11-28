@@ -16,18 +16,24 @@ export default (OriginalComponent) =>
     }
 
     render() {
-      console.log(this.state)
+      const comments = this.state.openComments && (
+        <OriginalComponent
+          {...this.props}
+          openComId={this.state.openComments}
+          toggleOpenCom={this.toggleOpenCom}
+        />
+      )
       return (
         <div>
-          <button onClick={console.log('323456')}>
-            {this.state.openComments ? 'close' : 'open'}
-          </button>
-          <OriginalComponent
-            {...this.props}
-            openComId={this.state.openComments}
-            toggleOpenCom={this.toggleOpenCom}
-          />
+          <button onClick={this.handleClick}>{this.state.openComments ? 'close' : 'open'}</button>
+          {comments}
         </div>
       )
+    }
+
+    handleClick = () => {
+      this.setState({
+        openComments: !this.state.openComments
+      })
     }
   }
