@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Comment from './comment'
-import accordion from '../decorators/accordion'
+import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
   setListRef = (ref) => {
@@ -11,20 +11,18 @@ class CommentList extends Component {
     return <ul ref={this.setListRef}>{this.commentItems()}</ul>
   }
 
+  getComments() {
+    return <ul ref={this.setListRef}>{this.commentItems()}</ul>
+  }
+
   commentItems() {
-    const { comments, openItemId, toggleOpenItem } = this.props
-    if (comments && comments.length) {
-      return comments.map((comment) => (
-        <li key={comment.id}>
-          <Comment
-            comment={comment}
-            isOpen={openItemId === comment.id}
-            toggleOpen={toggleOpenItem(comment.id)}
-          />
-        </li>
-      ))
-    }
+    const { comments } = this.props
+    return comments.map((comment) => (
+      <li key={comment.id}>
+        <Comment comment={comment} />
+      </li>
+    ))
   }
 }
 
-export default accordion(CommentList)
+export default toggleOpen(CommentList)
