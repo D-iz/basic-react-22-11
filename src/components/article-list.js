@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './article'
 import accordion from '../decorators/accordion'
 
 export class ArticleList extends Component {
+  static propTypes = {
+    fetchAllArticles: PropTypes.func,
+    articles: PropTypes.array,
+    openItemId: PropTypes.string,
+    toggleOpenItem: PropTypes.func
+  }
+
   setListRef = (ref) => {
     this.list = ref
   }
